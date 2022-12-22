@@ -78,9 +78,8 @@ class DBProvider{
   // update client theo id
   updateClient(Client newClient) async {
     final db = await database;
-    var res = await db.update("Client", newClient.toMap(),
+    return await db.update("Client", newClient.toMap(),
         where: "id = ?", whereArgs: [newClient.id]);
-    return res;
   }
 
   //block hoac unblock 1 client
@@ -100,6 +99,11 @@ class DBProvider{
   deleteClient(String last_name) async{
     final db = await database;
     db.delete(TABLE, where: "last_name = ?", whereArgs: [last_name]);
+  }
+
+  deleteClientID(int id) async{
+    final db = await database;
+    db.delete(TABLE, where: "id = ?", whereArgs: [id]);
   }
 
   // xoa tat ca
